@@ -1,0 +1,77 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  background-color: darkolivegreen;
+}
+
+
+
+div.layout {
+  display: flex;
+  flex-flow: column;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+
+}
+
+  div.layout .row {
+  }
+
+    div.layout .row.top {
+      flex: 0 1 150px;
+      background-color: #888888;
+    }
+
+    div.layout .row.mid {
+      flex: 0 1 600px;
+    }
+
+  div.layout .row.bottom {
+      flex: 1 1 auto;
+    }
+
+div.contents {
+  display: flex;
+  flex-flow: row;
+  height: 100%;
+}
+
+  div.contents .column{
+  }
+
+    div.contents .column.left {
+      flex: 0 1 1200px;
+    }
+
+    div.contents .column.mid {
+      flex: 0 1 166px;
+    }
+
+    div.contents .column.right {
+      flex: 1 1 auto;
+    }
+
+svg {
+  display: flex;
+  width: 1200px;
+  height: 600px;
+  background: url("./../img/background/forest_1200x600.png") no-repeat ;
+
+}
+
+.question_block {
+  position: relative;
+  top: -25px;
+  left: -25px;
+  border: 5px solid red;
+}
