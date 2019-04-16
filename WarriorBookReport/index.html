@@ -10,7 +10,10 @@
 
   <body>
      <div class="layout">
-      <div class="row top">head div</div>
+      <div class="row top">
+        <div id="question" class="qa"></div>
+        <div id="answer" class="qa"></div>
+      </div>
       <div class="row mid">
         <div class="contents">
           <div class="column left">
@@ -26,7 +29,7 @@
                        l 125 -80,
                        c 120 -50 120 250 0 260, c -30 10 -45 20 -55 55,
                        c -10 30 0 60 100 110"
-                    stroke="red" stroke-width="5" fill="none"></path>
+                    stroke="grey" stroke-width="1" fill="none"></path>
               <image id="question_0" class="question_block" href="./img/misc/questionblock_50x50.png" length="0"></image>
               <image id="question_1" class="question_block" href="./img/misc/questionblock_50x50.png" length="300"></image>
               <image id="question_2" class="question_block" href="./img/misc/questionblock_50x50.png" length="650"></image>
@@ -39,11 +42,13 @@
               <image id="question_9" class="question_block" href="./img/misc/questionblock_50x50.png" length="2000"></image>
               <image id="question_10" class="question_block" href="./img/misc/questionblock_50x50.png" length="9999"></image>
               <image id="character" href="./img/characters/firestar_100x100.png">
-                <!--<animateMotion calcMode="linear" dur="6s" repeatCount="0" keyTimes="0;1" keyPoints="0;0.5">
+                <animateMotion calcMode="linear" dur="15s" repeatCount="0">
                   <mpath xlink:href="#Warrior-Trail"></mpath>
-                </animateMotion>-->
+                </animateMotion>
               </image>
-
+              <!--<animateMotion id="animateMotionTemplate" calcMode="linear" dur="6s" repeatCount="0">
+                <mpath id="mpathTemplate" xlink:href="#Warrior-Trail"></mpath>
+              </animateMotion>-->
             </svg>
           </div>
           <div class="column mid"></div>

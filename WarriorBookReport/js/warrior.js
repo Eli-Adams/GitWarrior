@@ -1,21 +1,15 @@
-/*
-function dynamicallyLoadScript(url) {
-  const script = document.createElement("script");  // create a script DOM node
-  script.src = url;  // set its src to the provided URL
-  document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
-  return script;
-}
-*/
 
 class WarriorGame {
   constructor() {
     this._animationDuration = '6s';
-    this.map = document.getElementById('Warrior-Map');
-    this.trail = this.map.getElementsByTagName('path')[0];
+    this.getElement = () => document.getElementById('Warrior-Map');
+    this.element = this.getElement();
+    this.getTrail = () => document.getElementsByTagName('path')[0];
+    this.trail = this.getTrail();
     this.getTrailHead = (xy=null) => xy === null ? this.trail.getPointAtLength(0) : this.trail.getPointAtLength(0)[xy];
     this.getTrailId = () => this.trail.getAttribute('id');
-    this.trailMotionPath = document.createElement('mpath');
-    this.trailMotionPath.setAttribute('xlink:href', '#' + this.getTrailId());
+    this.getAnimationMotionTemplate = () => document.getElementById("animateMotionTemplate");
+    this.getMotionPathTemplate = () => document.getElementById('mpathTemplate');
     this.questions = Array();
     this.makeQuestions();
     this.getQuestion = (question_number) => this.questions[question_number];
@@ -26,10 +20,13 @@ class WarriorGame {
     this.getNextQuestion = () => this.getQuestion(this._activeQuestion + 1 >= this.questions.length ? this._activeQuestion -= this._activeQuestion : this._activeQuestion++);
     this.character = new WarriorCharacter('Firestar', this);
     this.setQuestion('The Darkest Hour: Warriors, Book 6', 'Book report by Eli Adams');
-
-
     this.loadElisScript('./elis_code/elis_javascript.js');
     this.setQuestion('End', 'End');
+    this.setQA();
+  }
+  setQA() {
+    document.getElementById('question').innerText = this.getQuestion(0).question;
+    document.getElementById('answer').innerText = this.getQuestion(0).answer;
   }
   makeQuestions() {
     const qs = document.getElementsByClassName('question_block');
@@ -52,23 +49,26 @@ class WarriorCharacter {
   constructor(character_name, warriorGame) {
     this.name = character_name;
     this.game = warriorGame;
-    this.map = this.game.map;
     this.trail = this.game.trail;
-    this.element = document.getElementById('character');
-    this.setX = (x=null) => this.element.setAttribute('x', x === null ? this.game.getActiveQuestion().pathX() : x);
-    this.setY = (y=null) => this.element.setAttribute('y', y === null ? this.game.getActiveQuestion().pathY() : y);
+    this.element = () => document.getElementById('character');
+    this.setX = (x=null) => this.element().setAttribute('x', x === null ? this.game.getActiveQuestion().pathX() : x);
+    this.setY = (y=null) => this.element().setAttribute('y', y === null ? this.game.getActiveQuestion().pathY() : y);
     this.setXY = (xy=null) => { this.setX(xy === null ? null : xy.x); this.setY(xy === null ? null : xy.y); }
     this.activeQuestion = () => this.game.getActiveQuestion();
+    this._question = 0;
     this.setPositionActive();
+    this.getNextQuestion = () => this.game.getQuestion(this._question + 1);
   }
   setPositionActive() {
-    this.element.setAttribute('x', this.activeQuestion().pathX());
-    this.element.setAttribute('y', this.activeQuestion().pathY());
+    //this.element().setAttribute('x', this.activeQuestion().pathX());
+    //this.element().setAttribute('y', this.activeQuestion().pathY());
     return this;
   }
+
   setMotionPath() {
-    alert(this.game.getNextQuestion())
-    return this.game.getNextQuestion()
+
+    this.element().appendChild(this.getNextQuestion().animateMotion());
+    return this;
     //this.element.appendChild(this.game.getNextQuestion().animateMotion);
   }
 }
@@ -84,18 +84,14 @@ class WarriorQuestion {
     this.getLength = () => this.element.getAttribute('length');
     this.moveMe();
     this.pathPosition = () => this.getLength() / this.trail.getTotalLength();
-    if(this.index > 0){
-      this.animateMotion = document.createElement('animateMotion');
-      this.animateMotion.setAttribute('calcMode', 'linear');
-      this.animateMotion.setAttribute('dur', this.game._animationDuration);
-      this.animateMotion.setAttribute('repeatCount', 0);
-      this.animateMotion.setAttribute('keyTimes', "0:1");
-      this.animateMotion.setAttribute('keyPoints',  this.game.questions[index - 1] + ':' + this.pathPosition());
-      this.animateMotion.appendChild(this.game.trailMotionPath);
-    }
-
   }
-
+  getAnimateMotion() {
+    animateMotion = this.game.getAnimationMotionTemplate().cloneNode(true);
+    animateMotion.setAttribute('id', 'questionindex' + this.index + 'animateMotion');
+    animateMotion.setAttribute('keyTimes', "0:1");
+    animateMotion.setAttribute('keyPoints',  this.pathPosition() + ':' + this.game.questions[this.index + 1 > this.game.questions.length ?  this.index : this.index + 1]);
+    return animateMotion;
+  }
   moveMe(length=null) {
     length = length || this.getLength();
     if(length !== null) {
