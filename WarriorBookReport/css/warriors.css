@@ -70,8 +70,9 @@ svg {
 }
 
 .question_block {
-  position: relative;
-  top: -25px;
-  left: -25px;
-  border: 5px solid red;
+  transform: translate(-25px, -25px);
+}
+
+#character {
+  transform: translate(-50px, -50px);
 }
