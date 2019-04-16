@@ -1,5 +1,8 @@
 
 w.setQuestion(
+'The Darkest Hour: Warriors, Book 6',
+'A book report by Eli Adams');
+w.setQuestion(
 'What is the title of your book?',
 'The title of my book is warriors #6 the darkest hour');
 w.setQuestion(
@@ -33,4 +36,8 @@ w.setQuestion(
 w.setQuestion(
  'What do you review the book?',
  'I rate this book 6 out of 5 stars and I would recommend it.'
+);
+w.setQuestion(
+ 'The end',
+ 'Thank you for watching this book report'
 );

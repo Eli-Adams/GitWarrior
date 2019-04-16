@@ -19,14 +19,12 @@ class WarriorGame {
     this.checkNextQuestion = () => this.getQuestion(this._activeQuestion + 1 >= this.questions.length ? 0 : this._activeQuestion + 1);
     this.getNextQuestion = () => this.getQuestion(this._activeQuestion + 1 >= this.questions.length ? this._activeQuestion -= this._activeQuestion : this._activeQuestion++);
     this.character = new WarriorCharacter('Firestar', this);
-    this.setQuestion('The Darkest Hour: Warriors, Book 6', 'Book report by Eli Adams');
     this.loadElisScript('./elis_code/elis_javascript.js');
-    this.setQuestion('End', 'End');
     this.setQA();
   }
   setQA() {
-    document.getElementById('question').innerText = this.getQuestion(0).question;
-    document.getElementById('answer').innerText = this.getQuestion(0).answer;
+    document.getElementById('question').innerText = 'The Darkest Hour: Warriors, Book 6';
+    document.getElementById('answer').innerText = 'A book report by Eli Adams';
   }
   makeQuestions() {
     const qs = document.getElementsByClassName('question_block');
@@ -64,12 +62,9 @@ class WarriorCharacter {
     //this.element().setAttribute('y', this.activeQuestion().pathY());
     return this;
   }
-
   setMotionPath() {
-
     this.element().appendChild(this.getNextQuestion().animateMotion());
     return this;
-    //this.element.appendChild(this.game.getNextQuestion().animateMotion);
   }
 }
 

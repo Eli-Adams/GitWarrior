@@ -38,6 +38,7 @@ div.layout {
         display: block;
         width: 1200px;
         border: 1px solid black;
+        background-color: black;
 
       }
 
