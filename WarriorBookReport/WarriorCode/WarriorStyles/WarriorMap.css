@@ -1,0 +1,32 @@
+svg {
+  display: flex;
+  width: 1200px;
+  height: 600px;
+  border: 1px solid black;
+  /*background-image: url("./../../WarriorData/images/default_background.png");*/
+  /*background-image: url("./../../WarriorData/Maps/TheDarkestHour.png");*/
+}
+.svg1 {
+  background-image: url("./../../WarriorData/images/default_background.png");
+}
+.svg2 {
+  background-image: url("./../../WarriorData/Maps/TheDarkestHour.png");
+}
+.block {
+  transform: translate(-25px, -25px);
+}
+.hidden_block {
+    visibility: hidden;
+}
+
+.question_block {
+  transform: translate(-25px, -25px);
+}
+
+#start-block {
+
+
+}
+#character {
+  transform: translate(-50px, -50px);
+}
