@@ -10,6 +10,7 @@ class WarriorGame {
     this._userCode =  Object();
     this._loadWarriorClasses(['WarriorGame', 'WarriorMap']);
     this._createClassObjects();
+    //document.getElementById()
   }
   static _createElement(elementType, attributes, appendTo) {
     const element = document.createElement(elementType);

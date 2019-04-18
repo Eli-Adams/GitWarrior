@@ -85,41 +85,46 @@ function charMoved(id) {
 
 }
 window.onkeyup = function(e) {
-  console.log(e.code)
-  if(e.code ==='Enter') {
-    if(prepped === false) {
-      prepped = true;
-      document.getElementById('Warrior-Map').classList.remove('svg1');
-      document.getElementById('Warrior-Map').classList.add('svg2');
+  console.log(e.code);
+  if (e.code === 'Enter') {
+    nextStep();
+  }
+}
+
+function nextStep() {
+  if(prepped === false) {
+    prepped = true;
+    document.getElementById('Warrior-Map').classList.remove('svg1');
+    document.getElementById('Warrior-Map').classList.add('svg2');
+  }
+  if(started === false) {
+    started = true;
+    const q = document.getElementsByClassName('block');
+    for(let i = 0; i < q.length; i++) {
+      q[i].removeAttribute('hidden');
     }
-    if(started === false) {
-      started = true;
-      const q = document.getElementsByClassName('block');
-      for(let i = 0; i < q.length; i++) {
-        q[i].removeAttribute('hidden');
-      }
-      const a = document.getElementsByClassName('question-motion');
-      for(let i = 0; i < a.length; i++) {
-        a[i].beginElement();
-      }
+    const a = document.getElementsByClassName('question-motion');
+    for(let i = 0; i < a.length; i++) {
+      a[i].beginElement();
+    }
+  } else {
+    const textEl = document.getElementsByTagName('text');
+    if(textEl[0].getAttribute('hidden') === null && textEl[1].getAttribute('hidden') !== null) {
+      textEl[1].removeAttribute('hidden');
     } else {
-      const textEl = document.getElementsByTagName('text');
-      if(textEl[0].getAttribute('hidden') === null && textEl[1].getAttribute('hidden') !== null) {
-        textEl[1].removeAttribute('hidden');
-      } else {
-        const cm = document.getElementsByClassName('character-motion')[0];
-        cm.classList.remove('character-motion');
-        document.getElementById('character').removeAttribute('x');
-        document.getElementById('character').removeAttribute('y');
-        textEl[0].setAttribute('hidden', 'hidden');
-        textEl[1].setAttribute('hidden', 'hidden');
-        cm.beginElement();
-      }
+      const cm = document.getElementsByClassName('character-motion')[0];
+      cm.classList.remove('character-motion');
+      document.getElementById('character').removeAttribute('x');
+      document.getElementById('character').removeAttribute('y');
+      textEl[0].setAttribute('hidden', 'hidden');
+      textEl[1].setAttribute('hidden', 'hidden');
+      cm.beginElement();
     }
   }
 }
+
   </script>
-     <div class="layout">
+     <div id="layout" class="layout" onclick="nextStep();">
       <div class="row top"></div>
       <div class="row mid">
         <div class="contents">
