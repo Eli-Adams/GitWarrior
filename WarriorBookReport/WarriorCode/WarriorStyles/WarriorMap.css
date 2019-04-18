@@ -30,3 +30,34 @@ svg {
 #character {
   transform: translate(-50px, -50px);
 }
+
+.svgq {
+  display: block;
+  font: 40px Arial; font-weight: bold; color: white;
+  width: 800px;
+  height: 450px;
+  position: absolute;
+  top: 450px;
+  left: 350px;
+  background-color: darkolivegreen;
+  border: 1px solid black;
+  text-indent: 5px;
+ visibility: hidden;
+
+}
+
+.svga { font: 28px Arial; color: lightgray;
+  display: block;
+  width: 800px;
+  height: 450px;
+  position: absolute;
+  top: 450px;
+  left: 350px;
+  background-color: darkolivegreen;border: 1px solid black;
+  text-indent: 5px;
+  visibility: hidden;
+}
+
+.svgx_hidden {
+  /*visibility: hidden;*/
+}

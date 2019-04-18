@@ -20,17 +20,16 @@ const questionText = [
     'The title of my book is warriors #6 the darkest hour'
   ],
   [
-    'Who is the author, publisher, And what\n' +
-    'is the copyright date?',
-    'Erin hunter is the author and the publisher is\n Harper Collins. The copyright date is 2004'
+    'Who is the author, publisher, And what is the copyright date?',
+    'Erin hunter is the author and the publisher is Harper Collins. The copyright date is 2004'
   ],
   [
     'Give us a summary.',
-    'SPOILER ALERT!!!!!!!   Don’t listen if you\'re reading this series.\n' +
-    'A prophecy from Starclan sends a ominous message to Firestar “Fire alone can save our clan.”-Starclan\n' +
-    'also Starclan says “Four will become 2 lion and tiger will meet in battle and blood will rule the forest.”-Starclan.\n' +
-    'So when Tigerstar tries to get Thunderclan and Windclan to join with Shadowclan and Riverclan Firestar \n' +
-    'persuades Riverclan and Windclan to join them they become Lionclan when Tigerstar loses all 9 live to \n' +
+    "SPOILER ALERT!!!!!!! \n  Don't listen if you're reading this series.\n" +
+    'A prophecy from Starclan sends a ominous message to Firestar \n"Fire alone can save our clan."-Starclan\n' +
+    'also Starclan says "Four will become 2 lion and tiger will meet in battle and blood will rule the forest."-Starclan.\n' +
+    'So when Tigerstar tries to get Thunderclan and Windclan to join with Shadowclan and Riverclan Firestar ' +
+    'persuades Riverclan and Windclan to join them they become Lionclan when Tigerstar loses all 9 live to ' +
     'Bloodclan Shadowclan joins Lionclan to rid the forest of Scourge and Bloodclan.'
   ],
   [
@@ -38,20 +37,20 @@ const questionText = [
      'It happened in a forest and the time it happened, I think it was modern day'
   ],
   [
-    'Who were the main characters?\n',
+    'Who were the main characters?',
      'The main characters were Firestar, Leopardstar, Tigerstar, Tallstar, and Scourge'
   ],
   [
-    'What was the conflict?\n',
+    'What was the conflict?',
      'Bloodclan tries to take over the forest'
   ],
   [
-    'What was the solution?\n',
+    'What was the solution?',
      'All the clans join together to fight Bloodclan off'
   ],
   [
     'What was the message?',
-     'Don’t give up and work together'
+     'Don\'t give up and work together'
   ],
   [
     'What do you review the book?',
@@ -71,16 +70,16 @@ function setPosition(el, val) {
 }
 function charMoved(id) {
   const idInt = id.replace('c', '');
-  const textEl = document.getElementsByTagName('text');
-  textEl[0].setAttribute('hidden', 'hidden');
-  textEl[1].setAttribute('hidden', 'hidden');
+  const textEl = document.getElementsByClassName('svgx');
+  textEl[0].style.visibility ='hidden';
+  textEl[1].style.visibility ='hidden';
   const q = document.getElementById(id === 'c10' ? 'end-block' : id.replace('c', 'q'));
   const char = document.getElementById('character');
   char.setAttribute('x', q.getAttribute('x'));
   char.setAttribute('y', q.getAttribute('y'))
-  textEl[0].textContent = questionText[idInt][0];
-  textEl[1].textContent = questionText[idInt][1];
-  textEl[0].removeAttribute('hidden');
+  textEl[0].innerText = questionText[idInt][0];
+  textEl[1].innerText = questionText[idInt][1];
+  textEl[0].style.visibility = 'visible';
 
 
 }
@@ -108,16 +107,16 @@ function nextStep() {
       a[i].beginElement();
     }
   } else {
-    const textEl = document.getElementsByTagName('text');
-    if(textEl[0].getAttribute('hidden') === null && textEl[1].getAttribute('hidden') !== null) {
-      textEl[1].removeAttribute('hidden');
+    const textEl = document.getElementsByClassName('svgx');
+    if(textEl[0].style.visibility === 'visible' && textEl[1].style.visibility =='hidden') {
+      textEl[1].style.visibility = 'visible'; //textEl[0].classList.add('svg_hidden')
     } else {
       const cm = document.getElementsByClassName('character-motion')[0];
       cm.classList.remove('character-motion');
       document.getElementById('character').removeAttribute('x');
       document.getElementById('character').removeAttribute('y');
-      textEl[0].setAttribute('hidden', 'hidden');
-      textEl[1].setAttribute('hidden', 'hidden');
+      textEl[0].style.visibility = 'hidden';
+      textEl[1].style.visibility = 'hidden';
       cm.beginElement();
     }
   }
@@ -236,13 +235,14 @@ function nextStep() {
                 </animateMotion>
               </image>
               <style>
-                .svgq { font: 40px Arial; font-weight: bold; fill: white; }
-                .svga { font: 28px Arial; fill: lightgray; }
+
               </style>
 
 
-              <text x="275" y="400" class="svgq" hidden="">Question</text>
-              <text x="275" y="500" class="svga" hidden="">answer</text>
+              <!--<text x="275" y="400" class="svgq" hidden="">Question</text>
+              <text x="275" y="500" class="svga" hidden="">answer</text>-->
+              <div x="275" y="400" class="svgq svgx svgx_hidden" >Question</div>
+              <div x="275" y="400" class="svga svgx svgx_hidden"">Answer</div>
             </svg>
           </div>
           <div class="column mid"></div>
